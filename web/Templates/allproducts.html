@@ -1,0 +1,100 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="bundle">
+  <p class="marquee"><marquee > Order now</marquee></p>
+  <p id="im_p">Fresh</p>
+  <p id="im_and">&</p>
+  <p id="im_cl">Clean</p>
+    <img src="../static/images/news-2.jpg" alt="" width="800" height="260px" style="margin-top: 10px; margin-left: -60px; "> 
+    <img src="../static/images/bac1.jpg" alt="" width="360" height="150px" style="margin-top: -58px; margin-left: -60px; box-shadow: -7px -7px 5px #ffffffa7; border-radius: 10px ">
+    <img src="../static/images/gradstd.jpg" alt="" width="360" height="150px" style="margin-top: -140px; margin-left: 810px; box-shadow: -7px -7px 5px #ffffffa7; border-radius: 10px; ">
+
+
+
+</div>
+
+
+<div class="row row-cols-1 row-cols-md-4 g-3" id="pull-col">
+  {% for all in prod %}
+    <div class="col">
+      <div class="card h-80">
+        <img src="{{ all.imageURL }}" class="card-img-top" alt="..." width="200" height="170">
+        <div class="card-body">
+          <h5 class="card-title"><strong>{{all.name}}</strong></h5>
+          <hr>
+          <p class="card-text">@each in shs  </p>
+          <button class="btn btn-outline-secondary add-btn">Add to cart</button>
+          <a class="btn btn-outline-success" href="#">View</a>
+          <h5 style="display: inline-block; float: right;">{{all.price|floatformat}}shs</5>
+        </div>
+      </div>
+      
+    </div>
+    {% endfor %}  
+  </div>
+
+
+
+  <footer>
+    <div class="footer-container">
+         <div class="foot-log">
+          <a href="#"> <span> O</span>neshop</a>
+          <div class="footer-social">
+            <a href="#"> <i class="fab fa-facebook-f "></i></a>
+            <a href="#"> <i class="fab fa-twitter "></i></a>
+            <a href="#"> <i class="fab fa-instagram"></i></a>
+            <a href="#"> <i class="fab fa-youtube "></i></a>
+  
+          </div>
+         </div>
+         <div class="footer-link">
+          <strong>Products</strong>
+          <ul>
+            <li><a href="#">Popular</a></li>
+            <li><a href="#">New</a></li>
+            <li><a href="#">packages</a></li>
+           
+          </ul>       
+         </div>
+  
+         <div class="footer-link">
+          <strong>Category</strong>
+          <ul>
+            <li><a href="#">Vegetables</a></li>
+            <li><a href="#">Fruits</a></li>
+            <li><a href="#">Foods</a></li>
+            <li><a href="#">Spices</a></li>
+            <li><a href="#">Oils</a></li>
+          
+          </ul>
+  
+          
+         </div>
+         <div class="footer-link">
+          <strong>Contacts</strong>
+          <ul>
+            <li style="font-size: 0.9rem; opacity: 0.5; color: #ffffff;">Phone:<a href="#" style="margin-left:5px;">0751530868</a></li>
+            <li style="font-size: 0.9rem; opacity: 0.5; color: #ffffff;">Email:<a href="#" style="margin-left:5px;">Oneshop@gmail.com</a></li>
+   
+          </ul>
+  
+          
+         </div>
+         <div class="footer-link">
+          <strong>Message</strong>
+          <ul>
+           <input type="text" style=" height:60px; border: none; border-radius: 5px; outline: none;">
+            <button  class="send" style="width: 50px; border: none; border-radius: 3px; background-color: rgb(255, 167, 4);" >Send</button>
+          </ul>
+  
+          
+         </div>
+         
+    </div>
+    
+  </footer>
+  
+ 
+ {% endblock content %}

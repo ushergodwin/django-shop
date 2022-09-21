@@ -1,0 +1,63 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>shop</title>
+    <link rel="stylesheet" href="{% static '/css/style.css' %}" type="text/css">
+</head>
+<body>
+      
+
+
+    <h1>Welcome to <h2>Oneshop</h2> </h1>
+    <h3>Grocery</h3>
+    <h4>Sing Up</h4>
+    
+    <form action="signup" method="post" class="form-input">
+        {%csrf_token %}
+        <div class="log"></div>
+        <div class="container">
+        <label for="" class="label">Username:</label>
+          <input type="text" id="username" name="username" placeholder="Create Username" class="input-field2" required>
+          <br>
+        <label for="" class="label">First Name:</label>
+          <input type="text" id="fname" name="fname" placeholder="Fill your First Name" class="input-field4" required>
+           <br>
+         <label for="" class="label">Last Name:</label>
+          <input type="text" id="lname" name="lname" placeholder="Fill your Last Name" class="input-field5" required>
+            <br>
+
+        <label for="" class="label">Email:</label>
+          <input type="email" id="email" name="email" placeholder="Enter your Email" class="input-field1" >
+            <br>
+
+        <label for="" class="label">Password:</label>
+          <input type="password" id="pas1" name="pas1" placeholder="Enter your Password" class="input-field3" required>
+            <br>
+
+          <label for="" class="label">Confirm Password:</label>
+          <input type="password" id="pas2" name="pas2" placeholder="Confirm Password" class="input-field" required>
+          <br>
+
+          <input type="checkbox" class="check-box"><span required>I agree to the terms and conditions.</span>
+          <button  class="button" type="submit">Sign Up</button>
+
+
+        </div>
+        <p>Already have an account <a href="{% url  'signin' %}">Sign In</a></p>
+
+
+    </form>
+    {% for message in messages %}
+     <div class="alert alert.{{message.tags}} alert-dismissible fade show" role="alert" style=" border-radius: 5px; margin-left: -698px; margin-top: 160px; width: 20%; height: 115px; background-color: rgb(223, 140, 140);">
+        <p  class="close" data-dismiss="alert" aria-label="close" style="   margin-top: 20px; margin-left: 10px; letter-spacing: 1px; font-size: 15px; font-family: Arial, Helvetica, sans-serif;"></button>
+         <strong style=" margin-top: 100px; "></strong> {{message}}
+        </p>
+     </div>
+     {% endfor %}
+     
+</body>
+</html>

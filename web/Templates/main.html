@@ -1,0 +1,84 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oneshop</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static '/css/style1.css' %}" type="text/css">
+    <script src="https://kit.fontawesome.com/23412c6a8d.js"></script>
+    <script type="text/javascript">
+      var user = '{{request.user}}'
+
+      function getToken(name){
+      var cookievalue = null;
+      if (document.cookie && document.cookie !== ''){
+          var cookie = document.cookie.split(';');
+          for ( var i=0; i < cookies.length; i++){
+              var cookie = cookies[i].trim();
+          if (cookie.substring(0, name.length + 1)===(
+            name + '=')){
+              cookievalue = decodeURIComponent(cookie.substring(
+                name.length + 1));
+              break; 
+            } 
+        }
+       }
+       return cookievalue;
+      }
+      var csftoken = getToken('csftoken');
+    </script>
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-light" id="navbar">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="{% url 'item' %}" style="font-size:38px; font-family:'Times New Roman', Times, serif; margin-left:80px; color: rgb(255, 166, 0); font-weight: 600;">Oneshop Grocery</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'item' %}"style="font-size:34px; font-family:'Times New Roman', Times, serif; margin-left:40px; color: rgb(255, 166, 0);">Home</a>
+              </li>
+            </ul>
+
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" id="form_control" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit" id="change_color">Search</button>
+            </form>
+      
+
+
+
+
+            <div class="form-inline my-2 my-lg-0">
+                <a href="#" class="btn btn-warning">Login</a>
+                <a href="{% url 'cart' %}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="19" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
+                        <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
+                      </svg>
+                </a>
+                <p id="cart-total">0</p>
+            </div>
+
+         
+        </div>
+      </nav>
+    <div class="container">
+        {% block content %}
+
+           {% endblock content %}
+      </div>
+
+
+
+
+<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+
+</body>
+</html>

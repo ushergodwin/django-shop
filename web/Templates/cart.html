@@ -1,0 +1,52 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+   
+   <div class="row"  style="margin-top:9rem ;">
+    <div class="col-lg-12" >
+      <div class="box-element"  id="box-color">
+        <a  class="btn btn-outline-dark" href="#">&#x2190;</a>
+        <br>
+        <br>
+        <table class="table">
+          <tr>
+            <th><h6>Products: <strong>{{order.get_cart_items}}</strong></h6></th>
+            <th><h6>Total: <strong>{{order.get_total_price|floatformat:2}}</strong></h6></th>
+            <th><a class="btn btn-success" href="{% url 'summary' %}">Check Out</a></th>
+
+          </tr>
+        </table>
+      </div>
+      <br>
+      <div class="box-element" id="box-color">
+        
+            <div class="cart-row">
+              <div style="flex: 2;"></div>
+              <div style="flex: 2;font-size: 20px;"><strong>ITEM</strong></div>
+              <div style="flex: 1;font-size: 20px;"><strong>QUANTITY</strong></div>
+              <div style="flex: 1;font-size: 20px;"><strong>PRICE</strong></div>
+              <div style="flex: 1;font-size: 20px;"><strong>TOTAL</strong></div>
+            </div>
+            {% for item in items  %}
+            <div class="cart-row" id="cart-row">
+              <i class="bx bxs-trash-alt cart-remove"></i>
+              <div style="flex: 2;"><img src="{{item.product.imageURL}}" alt="" class="flex-img"></div>
+              <div style="flex: 2;  margin-top: 44px; font-family: 'Times New Roman', Times, serif;font-size: 23px;">{{item.product.name}}</div>
+              <div style="flex: 1;">
+              <div style="flex: 1; margin-top: 44px;font-family: 'Times New Roman', Times, serif;font-size: 23px; " >{{item.product.price|floatformat:2}}shs</div>
+
+                 <p class="quantity1">{{item.quantity}}</p>
+                    <div class="quantity">
+                      <img data-product="{{item.product.id}}" data-action="add" src="{% static 'images/increase.png' %}" class="chg-quantity update-cart" alt="">
+                      <img data-product="{{item.product.id}}" data-action="remove" src="{% static 'images/decrease.png' %}" class="chg-quantity update-cart" alt="">
+                    </div>
+
+                    </div>
+                    <div style="flex: 1; margin-top: 44px;font-family: 'Times New Roman', Times, serif;font-size: 23px;" >{{item.get_total}}shs</div>
+            {% endfor %} 
+      </div>
+    </div> 
+   </div>
+  
+      {% endblock content %}
+   
