@@ -43,7 +43,6 @@ urlpatterns = [
     path('web/snack', views.snack, name='snack'),
     path('web/spice', views.spice, name='spice'),
     path('web/legumes', views.legumes, name='legumes'),
-    path('activate/<uidb64>/<token>', views.activate, name='activate'),
     path('updatecart', views.updateCart, name='updatecart'),
 
 
