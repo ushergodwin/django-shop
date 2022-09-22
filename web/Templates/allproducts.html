@@ -1,7 +1,7 @@
 {% extends 'main.html' %}
 {% load static %}
 {% block content %}
-
+{% include 'alert.html' %}
 <div class="bundle">
   <p class="marquee"><marquee > Order now</marquee></p>
   <p id="im_p">Fresh</p>
@@ -16,7 +16,8 @@
 </div>
 
 
-<div class="row row-cols-1 row-cols-md-4 g-3" id="pull-col">
+<div class="container">
+  <div class="row row-cols-1 row-cols-md-4 g-3" id="pull-col">
   {% for all in prod %}
     <div class="col">
       <div class="card h-80">
@@ -25,15 +26,23 @@
           <h5 class="card-title"><strong>{{all.name}}</strong></h5>
           <hr>
           <p class="card-text">@each in shs  </p>
-          <button class="btn btn-outline-secondary add-btn">Add to cart</button>
-          <a class="btn btn-outline-success" href="#">View</a>
-          <h5 style="display: inline-block; float: right;">{{all.price|floatformat}}shs</5>
+          <div div class="d-flex justify-content-between">
+            <form action="" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="price" value="{{ all.price }}"/>
+                <input type="hidden" name="product" value="{{ all.id }}"/>
+                <button class="btn btn-outline-secondary add-btn" type="submit">Add to cart</button>
+            </form>
+            <a class="btn btn-outline-success" href="#">View</a>
+          </div>
+          <h5 style="float: right;">{{all.price|floatformat}}shs</5>
         </div>
       </div>
       
     </div>
     {% endfor %}  
   </div>
+</div>
 
 
 
@@ -96,5 +105,9 @@
     
   </footer>
   
- 
+ <script type="text/javascript">
+    if ( window.history.replaceState ) {
+      window.history.replaceState( null, null, window.location.href );
+  }
+ </script>
  {% endblock content %}

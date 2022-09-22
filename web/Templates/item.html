@@ -2,7 +2,7 @@
 {% load static%}
 {% block content %}
 
-
+{% include 'alert.html' %}
 
    
 <div class="slider">
@@ -104,10 +104,17 @@
         <h6><strong>{{product.name}}</strong></h6>
         <hr>
           
-        <a data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn " id="update_cart">Add to Cart</a>
-               
-        <a class="btn btn-outline-success" href="#">View</a>
-        <h5 style="display: inline-block; float: right;">{{product.price}}</5>
+        <div class="d-flex justify-content-between">
+            <form action="" method="post">
+              {% csrf_token %}
+              <input type="hidden" name="price" value="{{ product.price }}"/>
+                <input type="hidden" name="product" value="{{ product.id }}"/>
+                <button class="btn btn-outline-secondary add-btn" type="submit">Add to cart</button>
+          </form>
+                
+          <a class="btn btn-outline-success" href="#">View</a>
+        </div>
+        <h5 style="float: right;">{{product.price}}</5>
       </div>
   
  </div>
@@ -132,9 +139,16 @@
                     <h5 class="card-title"><strong>{{product.name}}</strong></h5>
                     <hr>
                     <p class="card-text" style="font-family:Georgia, 'Times New Roman', Times, serif; font-size: 20px;">@each in shs </p>
-                    <button class="btn btn-outline-secondary add-btn">Add to cart</button>
-                    <a class="btn btn-outline-success" href="#">View</a>
-                    <h5 style="display: inline-block; float: right;">{{product.price}}</5>
+                    <div class="d-flex justify-content-between">
+                        <form action="" method="post">
+                          {% csrf_token %}
+                          <input type="hidden" name="price" value="{{ product.price }}"/>
+                          <input type="hidden" name="product" value="{{ product.id }}"/>
+                          <button class="btn btn-outline-secondary add-btn" type="submit">Add to cart</button>
+                      </form>
+                      <a class="btn btn-outline-success" href="#">View</a>
+                    </div>
+                    <h5 style="float: right;">{{product.price}}</5>
                   </div>
                 </div>
               </div>
@@ -162,10 +176,16 @@
           <div class="card-body">
             <h5 class="card-title"><strong>  Large Pack</strong></h5>
             <p class="card-text" id="large" >Tomato,Potato,Irish,Green paper +4</p>
-            <h5 style="display: inline-block; float: left; font-size: 28px;">200shs</5><br>
-            <button class="btn btn-outline-secondary add-btn" style="margin-left:10rem;" id="large">Add to cart</button>
-             
-             
+            <div class="d-flex justify-content-between">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="price" value="{{ product.price }}"/>
+                    <input type="hidden" name="product" value="{{ product.id }}"/>
+                    <button class="btn btn-outline-secondary add-btn" type="submit">Add to cart</button>
+                </form>
+                <a class="btn btn-outline-success" href="#">View</a>
+              </div>
+            <h5 style="float: left; font-size: 28px;">200shs</5><br>
           </div>
          
         </div>
@@ -292,7 +312,9 @@
         }
         
       },5000);
-
+    if ( window.history.replaceState ) {
+      window.history.replaceState( null, null, window.location.href );
+    }
  </script>
   
 {% endblock content%}

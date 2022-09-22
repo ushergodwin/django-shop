@@ -1,4 +1,3 @@
-from msilib.schema import Property
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -24,7 +23,7 @@ class Product(models.Model):
     def imageURL(self):
         try:
             url = self.image.url
-        except:
+        except Exception:
             url = ''
         return url
         
@@ -40,7 +39,7 @@ class All(models.Model):
     def imageURL(self):
         try:
             url = self.image.url
-        except:
+        except Exception:
             url = ''
         return url
 
@@ -57,7 +56,7 @@ class Mixed(models.Model):
     def imageURL(self):
         try:
             url = self.image.url
-        except:
+        except Exception:
             url = ''
         return url
 
@@ -74,7 +73,7 @@ class Vegetable(models.Model):
     def imageURL(self):
         try:
             url = self.image.url
-        except:
+        except Exception:
             url = ''
         return url
 
@@ -91,7 +90,7 @@ class Spice(models.Model):
     def imageURL(self):
         try:
             url = self.image.url
-        except:
+        except Exception:
             url = ''
         return url
 
@@ -108,7 +107,7 @@ class Snack(models.Model):
     def imageURL(self):
         try:
             url = self.image.url
-        except:
+        except Exception:
             url = ''
         return url
 
@@ -125,7 +124,7 @@ class Oil(models.Model):
     def imageURL(self):
         try:
             url = self.image.url
-        except:
+        except Exception:
             url = ''
         return url
 
@@ -142,7 +141,7 @@ class Legumes(models.Model):
     def imageURL(self):
         try:
             url = self.image.url
-        except:
+        except Exception:
             url = ''
         return url
 
@@ -159,7 +158,7 @@ class Fruit(models.Model):
     def imageURL(self):
         try:
             url = self.image.url
-        except:
+        except Exception:
             url = ''
         return url
 
@@ -174,23 +173,17 @@ class Order(models.Model):
        return str(self.id)
     @property
     def shipping(self):
-        shipping = False
         orderitems = self.orderitem_set.all()
-        for i in orderitems:
-            if i.product.digital == False:
-                shipping = True
-        return shipping        
+        return any(i.product.digital == False for i in orderitems)
 
     @property
     def get_cart_total(self):
         orderitems = self.orderitem_set.all()
-        total = sum([item.get_total for item in orderitems])
-        return total
+        return sum(item.get_total for item in orderitems)
     @property
     def get_cart_items(self):
         orderitems = self.orderitem_set.all()
-        total = sum([item.quantity for item in orderitems])
-        return total
+        return sum(item.quantity for item in orderitems)
 
 class OrderItem(models.Model):
     product= models.ForeignKey(Product, on_delete=models.SET_NULL,blank=True,null=True)
@@ -200,8 +193,7 @@ class OrderItem(models.Model):
 
     @property
     def get_total(self):
-        total = self.product.price * self.quantity
-        return total
+        return self.product.price * self.quantity
 
 class ShippingAddress(models.Model):
     customer= models.ForeignKey(Customer, on_delete=models.SET_NULL,blank=True,null=True)
@@ -216,6 +208,11 @@ class ShippingAddress(models.Model):
     def __str__(self):
        return str(self.address)
 
+class Cart(models.Model):
+    product = models.ForeignKey(All, on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING,  null=True, blank=True,related_name="customer_cart", unique=False)
+    quantity = models.IntegerField()
+    total_cost = models.IntegerField()
 
 
 

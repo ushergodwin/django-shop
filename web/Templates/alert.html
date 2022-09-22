@@ -1,0 +1,21 @@
+<div class="fixed-top">
+  <div class="d-flex justify-content-center" id="cartAlert">
+    {% for message in messages %}
+    <div class="alert alert-success alert-dismissible fade show">
+      <strong>Success!</strong> {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", () => {
+    var btn = document.getElementById("myBtn");
+    var element = document.getElementById("cartAlert");
+    // Create alert instance
+    var cartAlert = new bootstrap.Alert(element);
+    setTimeout(() => {
+      cartAlert.close();
+    }, 5000);
+  });
+</script>
