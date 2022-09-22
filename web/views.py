@@ -105,14 +105,16 @@ def cart(request):
         delete = request.POST.get('action') == "delete"
         modify_cart(request, delete)
 
+    products = total_cost = 0
+    
     if request.user.is_authenticated:
         customer = request.user.id
         items = Cart.objects.filter(user_id=customer).select_related()
+        request.user.cart_count = cart_count(request.user.id)
+        products = Cart.objects.filter(user_id=customer).count()
+        total_cost = sum(item.total_cost for item in Cart.objects.filter(user_id=customer))
     else:
         items =[]
-    request.user.cart_count = cart_count(request.user.id)
-    products = Cart.objects.filter(user_id=customer).count()
-    total_cost = sum(item.total_cost for item in Cart.objects.filter(user_id=customer))
     context = {'items':items, 'products': products, 'total': total_cost}
     return render(request,'cart.html',context)
 
